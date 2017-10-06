@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+.textClass {}
+
+</style>
+	<script type="text/javascript">
+	// you can write to stdout for debugging purposes, e.g.
+// console.log('this is a debug message');
+
+
+
+function solution(S) {
+    var timeArr =[];
+    var time = S.split("\n");
+    	time.map(function(val){
+    		val.trim();
+    		timeArr.push({"time":val.split(",")[0].trim().split(":"),"number":val.split(",")[1].trim()});
+    		
+    	});
+var totalDuration=[];
+    timeArr.map(function(val,index){
+    		totalDuration.push([])
+    		var totaltime = 60*60*parseInt(val.time[0]) + 60*parseInt(val.time[1]) +  parseInt(val.time[2]);
+    				
+    		
+    					
+		    			totalDuration[index]={time:totaltime,number:val.number}
+		    			
+    			
+    			 
+
+    	});
+var final = [];
+
+    for(var i=0;i<totalDuration.length;i++) { if(final[totalDuration[i].number]==undefined){ final[totalDuration[i].number] = totalDuration[i].time;} else{final[totalDuration[i].number]+=totalDuration[i].time}} 
+
+    var arr	= Object.values(final).sort(function(a,b){return a-b})
+	
+    var bill =0;
+    var billwithnumber={bill:[],number:[]};
+    totalDuration.map(function(val,index){
+					// for(i in val){
+					// 	if(val[1]>max){}
+					// }
+				});
+console.log(billwithnumber)
+    return bill;
+
+   
+
+}
+var S =`00:01:07,400-234-090
+   		00:05:01,701-080-080
+   		00:05:00,400-234-090`;
+
+console.log(solution(S))
+	 
+	</script>
+</head>
+<body>
+		
+			<div id="main"> <div>Do Tell you like it or not</div>
+				<button>like</button> <button onclick="catchclick()">comment</button>
+				
+				
+			</div>
+
+		
+</body>
+</html>

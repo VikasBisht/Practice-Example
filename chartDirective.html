@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	 	
+	 	<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+
+</head>
+<style type="text/css">
+	#abc {
+	min-width: 310px;
+	max-width: 800px;
+	height: 400px;
+	margin: 0 auto
+}
+</style>
+
+<body ng-controller="myController" >
+ <button ng-click="click()">Change Data</button>
+<div design id="abc" data='data'></div>
+
+
+</body>
+<script type="text/javascript">
+
+var module = angular.module("myModule",[])
+				.controller('myController',['$scope',function($scope){
+					$scope.user ={};
+					$scope.data =  [{
+						            name: 'Microsoft Internet Explorer',
+						            y: 56.33
+						        }, {
+						            name: 'Chrome',
+						            y: 24.03,
+						            sliced: true,
+						            selected: true
+						        }, {
+						            name: 'Firefox',
+						            y: 10.38
+						        }, {
+						            name: 'Safari',
+						            y: 4.77
+						        }, {
+						            name: 'Opera',
+						            y: 0.91
+						        }, {
+						            name: 'Proprietary or Undetectable',
+						             y: 0.2
+       								}]
+       							
+					
+					$scope.click = function(){
+						$scope.data =[{
+							
+						     
+						            name: 'Microsoft Internet Explorer',
+						            y: 16.33
+						        }, {
+						            name: 'Chrome',
+						            y: 4.03,
+						            sliced: true,
+						            selected: true
+						        }, {
+						            name: 'Firefox',
+						            y: 16.38
+						        }, {
+						            name: 'Safari',
+						            y: 40.77
+						        }, {
+						            name: 'Opera',
+						            y: 10.91
+						        }, {
+						            name: 'Proprietary or Undetectable',
+						             y: 10.2
+       								}]
+
+						
+					}
+					
+
+				}])
+				.directive('design',function(){
+					var chartConfig = { 
+						chart: {
+						        plotBackgroundColor: null,
+						        plotBorderWidth: null,
+						        plotShadow: false,
+						        type: 'pie'
+						    },
+						    title: {
+						        text: 'Browser market shares January, 2015 to May, 2015'
+						    },
+						    tooltip: {
+						        pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+						    },
+						    plotOptions: {
+						        pie: {
+						            allowPointSelect: true,
+						            cursor: 'pointer',
+						            dataLabels: {
+						                enabled: true,
+						                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+						                style: {
+						                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+						                }
+						            }
+						        }
+						    },
+						    series: [{
+						    	   name: 'Brands',
+						        	colorByPoint: true,
+						        data: [],
+						        
+						    }]
+						}
+					return{
+						restrict : "EA",
+						template :"<div > Chart Data :{{series}}</div>",
+						scope:{
+							'series' : '=data',
+						
+            			},
+
+						link : function (scope,attrs,element) {
+							var intialise = function (){
+							 		chartConfig.chart.renderTo = element.id;
+							 		
+							 		chartConfig.series[0].data = scope.series;
+							 		new Highcharts.chart(chartConfig);
+						 		}
+						 		
+						 		scope.$watch(function(){
+						 			return scope.series;
+						 		},function(value){
+						 			intialise();	
+						 		})
+							   }
+
+
+								
+
+						}			
+						
+					
+
+				});
+
+
+
+angular.bootstrap(document,['myModule'])
+</script>
+
+</html>

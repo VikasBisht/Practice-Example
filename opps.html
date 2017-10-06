@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+		* { padding: 0; margin: 0; }
+    	canvas { background: #131942; display: block; margin: 0 auto; }
+	</style> 
+</head>
+<body>
+<canvas id="myCanvas" width="800" height="800"></canvas>
+</body>
+
+</html>
+
+<script type="text/javascript">
+var canvas  = document.getElementById('myCanvas')
+var ctx = canvas.getContext("2d");
+// var obj ={
+// 		"x" : "400",
+// 		"y":	"400",
+// 		"dia" : "160"
+		
+
+// };
+
+// var floatIncrementCount = .1;
+// function drawArc(obj){
+// 	ctx.beginPath();
+// 	ctx.arc(obj.x,obj.y,obj.dia,obj.p,obj.math,true);
+// 	ctx.lineWidth =10;
+// 	ctx.strokeStyle= "#DEDEDE";
+// 	ctx.stroke()
+// 	ctx.closePath();
+// }
+
+// function getobject(){
+
+// 	obj.p = 6 + floatIncrementCount;
+// 	obj.math = Math.PI * floatIncrementCount/3;
+	
+// 	drawArc(obj);
+	
+// }
+
+// function draw(){
+// 	 ctx.clearRect(0, 0, canvas.width, canvas.height);
+// 		if(floatIncrementCount > 6) {	
+// 				floatIncrementCount = .1;	
+// 			}
+// 		else{
+// 			floatIncrementCount = floatIncrementCount + .1;
+// 		}
+// 		getobject()
+// }
+
+
+// setInterval(draw,1000)
+
+
+
+var floatIncrementCount =0.1;
+function circleObject(x,y,d,m,p,color){
+	this.x=x;
+	this.y=y;
+	this.d=d;
+	this.m=m;
+	this.p=p;
+	this.color=color
+	this.changeValue =function() {
+		
+		if(floatIncrementCount > 6) {	
+				floatIncrementCount = .1;	
+			}
+		else{
+			floatIncrementCount = floatIncrementCount + .1;
+		}
+		 	this.p = this.p + floatIncrementCount;
+		 	this.m = this.m +Math.PI * floatIncrementCount/3;
+		
+	}
+	this.drawCircle = function(){	
+		
+	
+		ctx.beginPath();
+		this.changeValue();
+		
+		ctx.arc(this.x,this.y,this.d,this.m,this.p,true);
+		ctx.lineWidth =10;
+		ctx.strokeStyle= this.color;
+		ctx.stroke();
+		ctx.closePath();
+	
+	
+	};
+
+	
+	return { draw :	this.drawCircle() }
+
+}
+
+
+var time = 10;
+
+setInterval(function(){ 
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	var o1 = new circleObject(400,400,120,.1,1,"#fff").draw;
+
+
+},time+30);
+setInterval(function(){
+	
+		var o2 = new circleObject(400,400,100,1.5,4,"#234670").draw;
+	var o3 = new circleObject(400,400,80,.2,3,"#135144").draw;
+
+},time+20)
+
+
+</script>

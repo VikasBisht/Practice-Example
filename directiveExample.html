@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	 		 	<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	 		 	<script type="text/javascript" src="lib.js"></script>
+
+</head>
+
+<body ng-controller="myController" class ="container">
+ <div class="col-sm-12">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="" ng-model="user.first" >
+            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+           First Box
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value=""  ng-model="user.second" >
+            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+            Second Box
+          </label>
+        </div>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value=""  ng-model="user.third" >
+            <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+            Third Box
+          </label>
+        </div>
+    </div>
+
+<design class="col-sm-12" value="user">
+		
+	
+ </design>
+
+
+
+</body>
+<script type="text/javascript">
+
+var module = angular.module("myModule",[])
+				.controller('myController',['$scope',function($scope){
+					$scope.user ={};
+					
+					
+					
+
+				}])
+				.directive('design',function(){
+				
+					return{
+						restrict : "EA",
+						template : '<div>	{{val}}</div>',
+						scope:{
+							val : "=value"
+						
+            			},
+						link : function (scope,element,attrs) {
+						 		element[0].children[0].style =  'border :1px solid black';
+							   }
+
+								
+
+						}			
+						
+					
+
+				});
+
+
+
+angular.bootstrap(document,['myModule'])
+</script>
+<script type="text/javascript">
+$(function() {
+    $('.multiselect-ui').multiselect({
+        includeSelectAllOption: true
+    });
+});
+</script>
+</html>
